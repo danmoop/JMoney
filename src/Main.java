@@ -5,11 +5,13 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Currency myCurr = new Currency(500, "EUR");
+        Currency myCurr = new Currency(63366.34, "USD");
 
-        Debug.Log("Amount: " + myCurr.getAmount());
-        Debug.Log("Currency: " + myCurr.getCurrencyType());
-        Debug.Log("Currency Str: " + myCurr.getAmountString());
-        Debug.Log("Text for display: " + myCurr.getText());
+        Debug.Log("BEFORE: " + myCurr.getFormattedAmount());
+
+        myCurr.subtract(31212.13);
+
+        Debug.Log("AFTER: " + myCurr.getFormattedAmount());
+
     }
 }

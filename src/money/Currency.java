@@ -13,9 +13,9 @@ public class Currency
     private Map<String, String> currencySigns;
 
     private String currencyType;
-    private float amount;
+    private double amount;
 
-    public Currency(float amount, String currencyType)
+    public Currency(double amount, String currencyType)
     {
         if(Arrays.asList(currencyList).contains(currencyType))
         {
@@ -43,19 +43,51 @@ public class Currency
         return currencyType;
     }
 
-    public float getAmount()
+    public double getAmount()
     {
-        return amount;
+        return Math.round(amount * 100.0) / 100.0;
     }
 
     public String getAmountString()
     {
-        return String.valueOf(amount);
+        return String.valueOf(Math.round(amount * 100.0) / 100.0);
     }
 
-    public void setAmount(float amount)
+    public String getFormattedAmount()
+    {
+        String str_amount = getAmountString();
+
+        String nums = str_amount.split("\\.")[0];
+        String decimals = str_amount.split("\\.")[1];
+
+        StringBuffer st = new StringBuffer(nums);
+
+        for(int i = nums.length(); i > 0; i--)
+        {
+            if((nums.length() - i) % 3 == 0)
+            {
+                st.insert(i, ",");
+            }
+        }
+
+        String result = String.valueOf(st.deleteCharAt(st.length() - 1));
+
+        return currencySigns.get(currencyType) + result + "." + decimals;
+    }
+
+    public void setAmount(double amount)
     {
         this.amount = amount;
+    }
+
+    public void add(double amount)
+    {
+        setAmount(getAmount() + amount);
+    }
+
+    public void subtract(double amount)
+    {
+        setAmount(getAmount() - amount);
     }
 
     public String getText()
