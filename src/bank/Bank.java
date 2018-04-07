@@ -17,18 +17,7 @@ public class Bank
     {
         if(Arrays.asList(currencyList).contains(secondCur))
         {
-
-            currencySigns = new HashMap<>();
-
-            currencySigns.put("USD", "$");
-            currencySigns.put("CAD", "$");
-            currencySigns.put("AUD", "$");
-            currencySigns.put("GBP", "£");
-            currencySigns.put("RUB", "\u20BD");
-            currencySigns.put("EUR", "€");
-
-            exchangeRate.put("EUR_USD", 1.22817);
-            exchangeRate.put("USD_EUR", 0.8143);
+            createCurrencySigns();
 
             if(firstCur.getCurrencyType().contains(secondCur))
                 Debug.Error("You can't convert currency to the same one.");
@@ -43,5 +32,26 @@ public class Bank
             Debug.Error("Unknown currency: " + secondCur);
             return null;
         }
+    }
+
+    private static void createCurrencySigns()
+    {
+        currencySigns = new HashMap<>();
+
+        currencySigns.put("USD", "$");
+        currencySigns.put("CAD", "$");
+        currencySigns.put("AUD", "$");
+        currencySigns.put("GBP", "£");
+        currencySigns.put("RUB", "\u20BD");
+        currencySigns.put("EUR", "€");
+
+        exchangeRate.put("EUR_USD", 1.22817);
+        exchangeRate.put("USD_EUR", 0.8143);
+
+        exchangeRate.put("USD_RUB", 58.1605);
+        exchangeRate.put("RUB_USD", 0.01719);
+
+        exchangeRate.put("EUR_RUB", 71.4450);
+        exchangeRate.put("RUB_EUR", 0.014);
     }
 }

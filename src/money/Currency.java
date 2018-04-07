@@ -26,15 +26,7 @@ public class Currency
             this.currencyType = currencyType;
             this.amount = amount;
 
-            currencySigns = new HashMap<>();
-
-            currencySigns.put("USD", "$");
-            currencySigns.put("CAD", "$");
-            currencySigns.put("AUD", "$");
-            currencySigns.put("GBP", "£");
-            currencySigns.put("RUB", "\u20BD");
-            currencySigns.put("EUR", "€");
-            formatter = new DecimalFormat("###.#####");
+            createCurrencySigns();
         }
 
         else
@@ -62,29 +54,26 @@ public class Currency
     {
         String str_amount = getAmountString();
 
+        if(!str_amount.contains(".0"))
+            str_amount = str_amount + ".0";
+
         String nums = str_amount.split("\\.")[0];
 
-        try {
-            String decimals = str_amount.split("\\.")[1];
+        String decimals = str_amount.split("\\.")[1];
 
-            StringBuffer st = new StringBuffer(nums);
+        StringBuffer st = new StringBuffer(nums);
 
-            for(int i = nums.length(); i > 0; i--)
+        for(int i = nums.length(); i > 0; i--)
+        {
+            if((nums.length() - i) % 3 == 0)
             {
-                if((nums.length() - i) % 3 == 0)
-                {
-                    st.insert(i, ",");
-                }
+                st.insert(i, ",");
             }
-
-            String result = String.valueOf(st.deleteCharAt(st.length() - 1));
-
-            return currencySigns.get(currencyType) + result + "." + decimals;
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Debug.Error("You have defined Double without decimal point.\n ×Wrong - double balance = 5000\n ✔Right - double balance = 5000.0");
-            return null;
         }
+
+        String result = String.valueOf(st.deleteCharAt(st.length() - 1));
+
+        return currencySigns.get(currencyType) + result + "." + decimals;
     }
 
     public void setAmount(double amount)
@@ -105,5 +94,24 @@ public class Currency
     public String getText()
     {
         return currencySigns.get(currencyType) + formatter.format(amount);
+    }
+
+    public int cents()
+    {
+        return (int) (amount * 100);
+    }
+
+    private void createCurrencySigns()
+    {
+        currencySigns = new HashMap<>();
+
+        currencySigns.put("USD", "$");
+        currencySigns.put("CAD", "$");
+        currencySigns.put("AUD", "$");
+        currencySigns.put("GBP", "£");
+        currencySigns.put("RUB", "\u20BD");
+        currencySigns.put("EUR", "€");
+
+        formatter = new DecimalFormat("###.#####");
     }
 }
