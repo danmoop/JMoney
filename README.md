@@ -33,10 +33,10 @@ myMoney.subtract(10000); // 245850.0
 Convert your currency to others
 ``` java
 Currency myNewMoney = Bank.convert(myMoney, "RUB");
-myNewMoney.getFormattedAmount(); // ₽145,401.25
+myNewMoney.getFormattedAmount(); // ₽14,880,363.93
 
 or
 
 Currency myNewMoney = Bank.convert(myMoney, "EUR");
-myNewMoney.getFormattedAmount(); // €2,035.75
+myNewMoney.getFormattedAmount(); // €208,338.66
 ```
