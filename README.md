@@ -38,5 +38,5 @@ myNewMoney.getFormattedAmount(); // ₽145,401.25
 or
 
 Currency myNewMoney = Bank.convert(myMoney, "EUR");
-Debug.Log(myNewMoney.getFormattedAmount()); // €2,035.75
+myNewMoney.getFormattedAmount(); // €2,035.75
 ```
