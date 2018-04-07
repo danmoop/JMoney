@@ -9,6 +9,7 @@ Get started by creating your currency
 
 ``` java
 Currency myMoney = new Currency(255850, "USD");
+myMoney.getCurrencyType(); // USD
 ```
 
 Get amount (instanceof double) or string
