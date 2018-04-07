@@ -1,3 +1,4 @@
+import bank.Bank;
 import misc.Debug;
 import money.Currency;
 
@@ -5,13 +6,13 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Currency myCurr = new Currency(63366.34, "USD");
+        Currency myCurr = new Currency(8777.25, "EUR");
 
-        Debug.Log("BEFORE: " + myCurr.getFormattedAmount());
+        Debug.Log(myCurr.getFormattedAmount());
 
-        myCurr.subtract(31212.13);
+        Currency myCurr2 = Bank.convert(myCurr, "USD");
 
-        Debug.Log("AFTER: " + myCurr.getFormattedAmount());
+        Debug.Log(myCurr2.getFormattedAmount());
 
     }
 }
