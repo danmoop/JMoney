@@ -18,6 +18,7 @@ public class Bank
         if(Arrays.asList(currencyList).contains(secondCur))
         {
             createCurrencySigns();
+            createCurrencyRates();
 
             if(firstCur.getCurrencyType().contains(secondCur))
                 Debug.Error("You can't convert currency to the same one.");
@@ -44,7 +45,10 @@ public class Bank
         currencySigns.put("GBP", "£");
         currencySigns.put("RUB", "\u20BD");
         currencySigns.put("EUR", "€");
+    }
 
+    public static void createCurrencyRates()
+    {
         exchangeRate.put("EUR_USD", 1.22817);
         exchangeRate.put("USD_EUR", 0.8143);
 
@@ -53,5 +57,23 @@ public class Bank
 
         exchangeRate.put("EUR_RUB", 71.4450);
         exchangeRate.put("RUB_EUR", 0.014);
+    }
+
+    public static Map<String, Double> getExchangeRate()
+    {
+        if(exchangeRate.size() != 0)
+            return exchangeRate;
+        else
+        {
+            createCurrencyRates();
+            return exchangeRate;
+        }
+    }
+
+    public static void setExchangeRate(String currencyNames, double rate)
+    {
+        createCurrencyRates();
+
+        getExchangeRate().put(currencyNames, rate);
     }
 }

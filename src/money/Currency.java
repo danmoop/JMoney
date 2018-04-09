@@ -96,6 +96,7 @@ public class Currency
         return currencySigns.get(currencyType) + formatter.format(amount);
     }
 
+
     public int cents()
     {
         return (int) (amount * 100);

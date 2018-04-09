@@ -6,9 +6,14 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Currency myCurr = new Currency(101554.32, "USD");
-        Debug.Log(myCurr.getFormattedAmount());
-        Currency myCurr2 = Bank.convert(myCurr, "USD");
-        Debug.Log(myCurr2.getFormattedAmount());
+        Currency myMoney = new Currency(100000, "RUB");
+
+        Debug.Log(myMoney.getFormattedAmount());
+
+        Bank.setExchangeRate("RUB_CAD", 0.022);
+
+        Currency myNewMoney = Bank.convert(myMoney, "CAD");
+
+        Debug.Log(myNewMoney.getFormattedAmount());
     }
 }
