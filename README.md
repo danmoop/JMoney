@@ -41,3 +41,12 @@ or
 Currency myNewMoney = Bank.convert(myMoney, "EUR");
 myNewMoney.getFormattedAmount(); // €208,338.66
 ```
+
+Set your custom exchange rate for any currencies
+```java 
+Currency myMoney = new Currency(1000, "EUR");
+myMoney.getFormattedAmount(); // €1,000.0
+Bank.setExchangeRate("EUR_GBP", 0.871);
+Currency myNewMoney = Bank.convert(myMoney, "GBP");
+myNewMoney.getFormattedAmount(); // £871.0 
+```
