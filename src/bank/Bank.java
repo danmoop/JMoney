@@ -23,9 +23,17 @@ public class Bank
             if(firstCur.getCurrencyType().contains(secondCur))
                 Debug.Error("You can't convert currency to the same one.");
 
-            Double newBalance = firstCur.getAmount() * exchangeRate.get(firstCur.getCurrencyType()+"_"+secondCur);
+            if(exchangeRate.get(firstCur.getCurrencyType()+"_"+secondCur) != null)
+            {
+                Double newBalance = firstCur.getAmount() * exchangeRate.get(firstCur.getCurrencyType() + "_" + secondCur);
+                return new Currency(newBalance, secondCur);
+            }
 
-            return new Currency(newBalance, secondCur);
+            else
+            {
+                Debug.Log("Exchange rate " + firstCur.getCurrencyType() + "_" + secondCur + " is not found. \n Add it manually using Bank.setExchangeRate('" + firstCur.getCurrencyType()+"_"+secondCur+"', rate);");
+                return null;
+            }
         }
 
         else
@@ -33,6 +41,7 @@ public class Bank
             Debug.Error("Unknown currency: " + secondCur);
             return null;
         }
+
     }
 
     private static void createCurrencySigns()

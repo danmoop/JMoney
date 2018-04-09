@@ -6,13 +6,13 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Currency myMoney = new Currency(100000, "RUB");
+        Currency myMoney = new Currency(100000, "EUR");
 
         Debug.Log(myMoney.getFormattedAmount());
 
-        Bank.setExchangeRate("RUB_CAD", 0.022);
+        Bank.setExchangeRate("EUR_GBP", 0.8);
 
-        Currency myNewMoney = Bank.convert(myMoney, "CAD");
+        Currency myNewMoney = Bank.convert(myMoney, "GBP");
 
         Debug.Log(myNewMoney.getFormattedAmount());
     }
