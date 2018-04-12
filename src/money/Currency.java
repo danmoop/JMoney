@@ -4,13 +4,13 @@ import misc.Debug;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Currency
 {
-    public static String[] currencyList = {"USD", "CAD", "AUD", "GBP", "RUB", "EUR"};
+    public static String[] currencies = {"USD", "CAD", "AUD", "GBP", "RUB", "EUR"};
+
+    private static List<String> currencyList  = new ArrayList<>();
 
     private Map<String, String> currencySigns;
 
@@ -21,17 +21,17 @@ public class Currency
 
     public Currency(double amount, String currencyType)
     {
-        if(Arrays.asList(currencyList).contains(currencyType))
-        {
-            this.currencyType = currencyType;
-            this.amount = amount;
 
-            createCurrencySigns();
-        }
+        this.currencyType = currencyType;
+        this.amount = amount;
+        createCurrencySigns();
 
-        else
+        currencyList.addAll(Arrays.asList(currencies));
+
+        if(!currencyList.contains(currencyType))
         {
-            Debug.Error("Unknown currency: " + currencyType);
+            currencyList.add(currencyType);
+            currencySigns.put(currencyType, "...");
         }
     }
 
@@ -114,5 +114,20 @@ public class Currency
         currencySigns.put("EUR", "€");
 
         formatter = new DecimalFormat("###.#####");
+    }
+
+    public void setCurrencyType(String currencyType)
+    {
+        this.currencyType = currencyType;
+    }
+
+    public static List<String> getCurrencyList()
+    {
+        return currencyList;
+    }
+
+    public void setCurrencySign(String sign)
+    {
+        currencySigns.put(currencyType, sign);
     }
 }

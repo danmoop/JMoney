@@ -5,17 +5,18 @@ import money.Currency;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Bank
 {
-    private static String[] currencyList = Currency.currencyList;
+    private static List<String> currencyList = Currency.getCurrencyList();
     private static Map<String, String> currencySigns;
     private static Map<String, Double> exchangeRate = new HashMap<>();
 
     public static Currency convert(Currency firstCur, String secondCur)
     {
-        if(Arrays.asList(currencyList).contains(secondCur))
+        if(currencyList.contains(secondCur))
         {
             createCurrencySigns();
             createCurrencyRates();

@@ -6,14 +6,14 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Currency myMoney = new Currency(100000, "EUR");
+        Currency myMoney = new Currency(1000, "CHF");
 
-        Debug.Log(myMoney.getFormattedAmount());
+        myMoney.setCurrencySign("CHF");
 
-        Bank.setExchangeRate("EUR_GBP", 0.8);
+        Bank.setExchangeRate("CHF_RUB", 64.32);
 
-        Currency myNewMoney = Bank.convert(myMoney, "GBP");
+        Currency myRubs = Bank.convert(myMoney, "RUB");
 
-        Debug.Log(myNewMoney.getFormattedAmount());
+        Debug.Log(myRubs.getFormattedAmount());
     }
 }
