@@ -31,7 +31,7 @@ public class Currency
         if(!currencyList.contains(currencyType))
         {
             currencyList.add(currencyType);
-            currencySigns.put(currencyType, "...");
+            currencySigns.put(currencyType, "(sign)");
         }
     }
 
@@ -129,5 +129,13 @@ public class Currency
     public void setCurrencySign(String sign)
     {
         currencySigns.put(currencyType, sign);
+    }
+
+    public boolean isEqualTo(Currency cur)
+    {
+        if(this.currencyType == cur.currencyType && this.amount == cur.amount)
+            return true;
+
+        return false;
     }
 }
