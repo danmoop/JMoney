@@ -1,7 +1,5 @@
 package money;
 
-import misc.Debug;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.*;
@@ -16,6 +14,8 @@ public class Currency
 
     private String currencyType;
     private double amount;
+
+    private boolean isSignHidden;
 
     NumberFormat formatter;
 
@@ -33,6 +33,8 @@ public class Currency
             currencyList.add(currencyType);
             currencySigns.put(currencyType, "(sign)");
         }
+
+        isSignHidden = false;
     }
 
     public String getCurrencyType()
@@ -73,7 +75,10 @@ public class Currency
 
         String result = String.valueOf(st.deleteCharAt(st.length() - 1));
 
-        return currencySigns.get(currencyType) + result + "." + decimals;
+        if(isSignHidden)
+            return result + "." + decimals;
+        else
+            return currencySigns.get(currencyType) + result + "." + decimals;
     }
 
     public void setAmount(double amount)
@@ -137,5 +142,15 @@ public class Currency
             return true;
 
         return false;
+    }
+
+    public void hideCurrencySign()
+    {
+        isSignHidden = true;
+    }
+
+    public void showCurrencySign()
+    {
+        isSignHidden = false;
     }
 }
