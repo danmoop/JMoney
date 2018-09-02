@@ -8,38 +8,38 @@ This is supposed to be Java version of [Ruby money library](https://github.com/R
 Get started by creating your currency
 
 ``` java
-Currency myMoney = new Currency(255850, "USD");
+Currency myMoney = new Currency(1500, "USD");
 myMoney.getCurrencyType(); // USD
 ```
 
 Get amount (instanceof double) or string
 
 ``` java
-myMoney.getAmount(); // 255850.0
-myMoney.getAmountString(); // 255850.0
+myMoney.getAmount(); // 1500.0 (double type)
+myMoney.getAmountString(); // 1500.0 (string type)
 ```
 
 There is sign for each currency and amount digits are divided by comas
 
 ``` java
-myMoney.getFormattedAmount(); // $255,850.0
+myMoney.getFormattedAmount(); // $1,500.0
 ```
 
 Easy operations and conversations
 ``` java
-myMoney.add(10000); // 265850.0
-myMoney.subtract(10000); // 245850.0
+myMoney.add(500); // 2000.0
+myMoney.subtract(500); // 1000.0
 ```
 
 Convert your currency to others
 ``` java
 Currency myNewMoney = Bank.convert(myMoney, "RUB");
-myNewMoney.getFormattedAmount(); // ₽14,880,363.93
+myNewMoney.getFormattedAmount(); // ₽135,032.93
 
 or
 
 Currency myNewMoney = Bank.convert(myMoney, "EUR");
-myNewMoney.getFormattedAmount(); // €208,338.66
+myNewMoney.getFormattedAmount(); // €1,720.66
 ```
 
 Set your custom exchange rate for any currencies
