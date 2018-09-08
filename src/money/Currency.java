@@ -81,6 +81,17 @@ public class Currency
             return currencySigns.get(currencyType) + result + "." + decimals;
     }
 
+    public String getBriefAmount()
+    {
+        if(amount / 1000 > 1 && amount / 1000000 < 1)
+            return String.valueOf(Math.round((amount / 1000) * 10.0) / 10.0) + "K";
+        else if(amount / 1000000 > 1 && amount / 1000000000 < 1)
+            return String.valueOf(Math.round((amount / 1000000) * 10.0) / 10.0) + "M";
+        else if(amount / 1000000000 > 1)
+            return String.valueOf(Math.round((amount / 1000000000) * 10.0) / 10.0) + "B";
+        return getAmountString();
+    }
+
     public void setAmount(double amount)
     {
         this.amount = amount;

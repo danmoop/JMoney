@@ -5,10 +5,8 @@ public class Main
 {
     public static void main(String[] args)
     {
-        Currency myMoney = new Currency(15000, "BTC");
+        Currency myMoney = new Currency(12561200, "USD");
 
-        myMoney.hideCurrencySign();
-
-        Debug.Log(myMoney.getFormattedAmount());
+        Debug.Log(myMoney.getBriefAmount());
     }
 }

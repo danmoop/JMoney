@@ -62,10 +62,10 @@ public class Bank
         exchangeRate.put("EUR_USD", 1.22817);
         exchangeRate.put("USD_EUR", 0.8143);
 
-        exchangeRate.put("USD_RUB", 58.1605);
+        exchangeRate.put("USD_RUB", 69.91); // :(
         exchangeRate.put("RUB_USD", 0.01719);
 
-        exchangeRate.put("EUR_RUB", 71.4450);
+        exchangeRate.put("EUR_RUB", 80.9);
         exchangeRate.put("RUB_EUR", 0.014);
     }
 
