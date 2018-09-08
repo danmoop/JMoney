@@ -25,6 +25,11 @@ There is sign for each currency and amount digits are divided by comas
 myMoney.getFormattedAmount(); // $1,500.0
 ```
 
+``` java
+Currency myMoney = new Currency(12561200, "USD");
+myMoney.getBriefAmount(); // 12.6M
+```
+
 Easy operations and conversations
 ``` java
 myMoney.add(500); // 2000.0
