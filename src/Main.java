@@ -1,12 +1,14 @@
-import misc.Debug;
+import bank.Bank;
 import money.Currency;
 
 public class Main
 {
     public static void main(String[] args)
     {
-        Currency myMoney = new Currency(12561200, "USD");
+        Currency money = new Currency(1071231491, "USD");
 
-        Debug.Log(myMoney.getBriefAmount());
+        Bank.setExchangeRate("USD_RUB", 132);
+
+        System.out.println(money.getFormattedString());
     }
 }

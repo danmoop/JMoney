@@ -3,7 +3,6 @@ package bank;
 import misc.Debug;
 import money.Currency;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,35 +13,36 @@ public class Bank
     private static Map<String, String> currencySigns;
     private static Map<String, Double> exchangeRate = new HashMap<>();
 
-    public static Currency convert(Currency firstCur, String secondCur)
+    public static Currency convert(Currency firstCurrency, String secondCurrency)
     {
-        if(currencyList.contains(secondCur))
+        if(currencyList.contains(secondCurrency))
         {
             createCurrencySigns();
-            createCurrencyRates();
 
-            if(firstCur.getCurrencyType().contains(secondCur))
-                Debug.Error("You can't convert currency to the same one.");
+            if(exchangeRate.size() == 0)
+                createCurrencyRates();
 
-            if(exchangeRate.get(firstCur.getCurrencyType()+"_"+secondCur) != null)
+            if(firstCurrency.getCurrencyType().contains(secondCurrency))
+                return firstCurrency;
+
+            if(exchangeRate.get(firstCurrency.getCurrencyType()+"_"+secondCurrency) != null)
             {
-                Double newBalance = firstCur.getAmount() * exchangeRate.get(firstCur.getCurrencyType() + "_" + secondCur);
-                return new Currency(newBalance, secondCur);
+                double newBalance = firstCurrency.getAmount() * exchangeRate.get(firstCurrency.getCurrencyType() + "_" + secondCurrency);
+                return new Currency(newBalance, secondCurrency);
             }
 
             else
             {
-                Debug.Log("Exchange rate " + firstCur.getCurrencyType() + "_" + secondCur + " is not found. \n Add it manually using Bank.setExchangeRate('" + firstCur.getCurrencyType()+"_"+secondCur+"', rate);");
+                Debug.Log("Exchange rate " + firstCurrency.getCurrencyType() + "_" + secondCurrency + " is not found. \n Add it manually using Bank.setExchangeRate('" + firstCurrency.getCurrencyType()+"_"+secondCurrency+"', rate);");
                 return null;
             }
         }
 
         else
         {
-            Debug.Error("Unknown currency: " + secondCur);
+            Debug.Error("Unknown currency: " + secondCurrency);
             return null;
         }
-
     }
 
     private static void createCurrencySigns()
@@ -57,7 +57,7 @@ public class Bank
         currencySigns.put("EUR", "€");
     }
 
-    public static void createCurrencyRates()
+    private static void createCurrencyRates()
     {
         exchangeRate.put("EUR_USD", 1.22817);
         exchangeRate.put("USD_EUR", 0.8143);
@@ -82,7 +82,8 @@ public class Bank
 
     public static void setExchangeRate(String currencyNames, double rate)
     {
-        createCurrencyRates();
+        if(exchangeRate.size() == 0)
+            createCurrencyRates();
 
         getExchangeRate().put(currencyNames, rate);
     }

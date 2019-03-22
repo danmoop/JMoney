@@ -1,4 +1,4 @@
-# JMoney
+﻿# JMoney
 JMoney is a library for dealing with money and currency conversations (For Spring app for example)
 
 This is supposed to be Java version of [Ruby money library](https://github.com/RubyMoney/money)
@@ -22,7 +22,7 @@ myMoney.getAmountString(); // 1500.0 (string type)
 There is sign for each currency and amount digits are divided by comas
 
 ``` java
-myMoney.getFormattedAmount(); // $1,500.0
+myMoney.getFormattedString(); // $1,500.0
 ```
 
 ``` java

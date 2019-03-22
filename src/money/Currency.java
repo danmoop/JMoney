@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Currency
 {
-    public static String[] currencies = {"USD", "CAD", "AUD", "GBP", "RUB", "EUR"};
+    private static String[] currencies = {"USD", "CAD", "AUD", "GBP", "RUB", "EUR"};
 
     private static List<String> currencyList  = new ArrayList<>();
 
@@ -17,11 +17,10 @@ public class Currency
 
     private boolean isSignHidden;
 
-    NumberFormat formatter;
+    private NumberFormat formatter;
 
     public Currency(double amount, String currencyType)
     {
-
         this.currencyType = currencyType;
         this.amount = amount;
         createCurrencySigns();
@@ -49,10 +48,10 @@ public class Currency
 
     public String getAmountString()
     {
-        return formatter.format(Math.round(amount * 100.0) / 100.0).replace(",", ".");
+        return formatter.format(getAmount());
     }
 
-    public String getFormattedAmount()
+    public String getFormattedString()
     {
         String str_amount = getAmountString();
 
@@ -149,10 +148,7 @@ public class Currency
 
     public boolean isEqualTo(Currency cur)
     {
-        if(this.currencyType == cur.currencyType && this.amount == cur.amount)
-            return true;
-
-        return false;
+        return this.currencyType.equals(cur.currencyType) && this.amount == cur.amount;
     }
 
     public void hideCurrencySign()
