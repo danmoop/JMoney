@@ -53,42 +53,25 @@ public class Currency
 
     public String getFormattedString()
     {
-        String str_amount = getAmountString();
+        NumberFormat currencyFormat = new DecimalFormat("#,###.##");
 
-        if(!str_amount.contains(".0"))
-            str_amount = str_amount + ".0";
+        String result = currencyFormat.format(getAmount());
 
-        String nums = str_amount.split("\\.")[0];
-
-        String decimals = str_amount.split("\\.")[1];
-
-        StringBuffer st = new StringBuffer(nums);
-
-        for(int i = nums.length(); i > 0; i--)
-        {
-            if((nums.length() - i) % 3 == 0)
-            {
-                st.insert(i, ",");
-            }
-        }
-
-        String result = String.valueOf(st.deleteCharAt(st.length() - 1));
-
-        if(isSignHidden)
-            return result + "." + decimals;
-        else
-            return currencySigns.get(currencyType) + result + "." + decimals;
+        return isSignHidden ? result : currencySigns.get(currencyType) + result;
     }
 
     public String getBriefAmount()
     {
+        String currencySign = currencySigns.get(currencyType);
+
         if(amount / 1000 > 1 && amount / 1000000 < 1)
-            return String.valueOf(Math.round((amount / 1000) * 10.0) / 10.0) + "K";
+            return currencySign + Math.round((amount / 1000) * 10.0) / 10.0 + "K";
         else if(amount / 1000000 > 1 && amount / 1000000000 < 1)
-            return String.valueOf(Math.round((amount / 1000000) * 10.0) / 10.0) + "M";
+            return currencySign + Math.round((amount / 1000000) * 10.0) / 10.0 + "M";
         else if(amount / 1000000000 > 1)
-            return String.valueOf(Math.round((amount / 1000000000) * 10.0) / 10.0) + "B";
-        return getAmountString();
+            return currencySign + Math.round((amount / 1000000000) * 10.0) / 10.0 + "B";
+
+        return getFormattedString();
     }
 
     public void setAmount(double amount)
