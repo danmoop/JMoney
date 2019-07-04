@@ -27,7 +27,7 @@ myMoney.getFormattedString(); // $1,500.0
 
 ``` java
 Currency myMoney = new Currency(12561200, "USD");
-myMoney.getBriefAmount(); // 12.6M
+myMoney.getBriefAmount(); // $12.6M
 ```
 
 Easy operations and conversations
